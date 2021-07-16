@@ -13,3 +13,16 @@
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
+
+# config file
+*.yaml
+*.db
+*.tmp
+*.sum
+
+krakend/krakend
+
+# Folders
+tmp
+data
+secret

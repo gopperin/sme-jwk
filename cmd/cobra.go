@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/fatih/color"
 	"github.com/spf13/cobra"
 
 	"sme-jwk/cmd/api"
@@ -23,14 +24,30 @@ var rootCmd = &cobra.Command{
 		}
 		return nil
 	},
-	PersistentPreRunE: func(*cobra.Command, []string) error { return nil },
+	PersistentPreRunE: func(*cobra.Command, []string) error {
+		tip()
+		return nil
+	},
 	Run: func(cmd *cobra.Command, args []string) {
 		tip()
 	},
 }
 
 func tip() {
-	fmt.Println("欢迎使用gojwk")
+	strUp := `
+	+-+-+-+-+-+-+-+ +-+-+-+-+-+-+-+
+	|w|e|l|c|o|m|e| |s|m|e|-|j|w|k|
+	+-+-+-+-+-+-+-+ +-+-+-+-+-+-+-+`
+	strDown := `	├── cobra
+	├── viper
+	├── wire
+	└── clean
+`
+	color.Set(color.FgHiBlue, color.Bold)
+	defer color.Unset()
+	fmt.Println(strUp)
+	color.Set(color.FgGreen, color.Bold)
+	fmt.Println(strDown)
 }
 
 func init() {

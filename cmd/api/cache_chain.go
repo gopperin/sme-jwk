@@ -8,6 +8,8 @@ import (
 	"github.com/eko/gocache/store"
 	"github.com/go-redis/redis/v7"
 	"github.com/sirupsen/logrus"
+
+	myconfig "sme-jwk/internal/config"
 )
 
 // InitChainCache InitChainCache
@@ -20,7 +22,7 @@ func InitChainCache() (*cache.ChainCache, error) {
 		panic(err)
 	}
 
-	redisClient := redis.NewClient(&redis.Options{Addr: "127.0.0.1:6379"})
+	redisClient := redis.NewClient(&redis.Options{Addr: myconfig.Case.Redis.Addr})
 
 	// Initialize stores
 	ristrettoStore := store.NewRistretto(ristrettoCache, nil)

@@ -2,10 +2,7 @@ package config
 
 import ()
 
-// ApplicationStruct ApplicationStruct
-type ApplicationStruct struct {
-	Port string
-}
-
 // Application Application
-var Application = new(ApplicationStruct)
+type Application struct {
+	Port string `mapstructure:"port" json:"port" yaml:"port"`
+}

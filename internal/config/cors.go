@@ -2,15 +2,12 @@ package config
 
 import ()
 
-// CORSStruct 跨域请求配置参数
-type CORSStruct struct {
-	Enable           bool
-	AllowOrigins     []string
-	AllowMethods     []string
-	AllowHeaders     []string
-	AllowCredentials bool
-	MaxAge           int
+// CORS 跨域请求配置参数
+type CORS struct {
+	Enable           bool     `mapstructure:"enable" json:"enable" yaml:"enable"`
+	AllowOrigins     []string `mapstructure:"AllowOrigins" json:"AllowOrigins" yaml:"AllowOrigins"`
+	AllowMethods     []string `mapstructure:"AllowMethods" json:"AllowMethods" yaml:"AllowMethods"`
+	AllowHeaders     []string `mapstructure:"AllowHeaders" json:"AllowHeaders" yaml:"AllowHeaders"`
+	AllowCredentials bool     `mapstructure:"AllowCredentials" json:"AllowCredentials" yaml:"AllowCredentials"`
+	MaxAge           int      `mapstructure:"MaxAge" json:"MaxAge" yaml:"MaxAge"`
 }
-
-// CORS CORS
-var CORS = new(CORSStruct)

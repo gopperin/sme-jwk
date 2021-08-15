@@ -52,12 +52,12 @@ func run() {
 	myrouter.SetupJwkRouter(router, _cacheChain)
 
 	server := &http.Server{
-		Addr:         ":" + myconfig.Application.Port,
+		Addr:         ":" + myconfig.Case.Application.Port,
 		Handler:      router,
 		ReadTimeout:  300 * time.Second,
 		WriteTimeout: 300 * time.Second,
 	}
 
-	logrus.Println("sme-stage start on:", myconfig.Application.Port)
+	logrus.Println("sme-stage start on:", myconfig.Case.Application.Port)
 	gracehttp.Serve(server)
 }

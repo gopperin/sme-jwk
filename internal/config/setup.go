@@ -5,20 +5,21 @@ import (
 	"os"
 	"strings"
 
+	"github.com/fsnotify/fsnotify"
 	"github.com/spf13/viper"
 )
 
 const cmdRoot = "core"
 
 // Setup 载入配置文件
-func Setup(path string) {
+func Setup(path ...string) {
 
 	viper.SetEnvPrefix(cmdRoot)
 	viper.AutomaticEnv()
 	replacer := strings.NewReplacer(".", "_")
 	viper.SetEnvKeyReplacer(replacer)
 	viper.SetConfigName(cmdRoot)
-	viper.AddConfigPath(path)
+	viper.AddConfigPath(path[0])
 
 	err := viper.ReadInConfig()
 	if err != nil {
@@ -26,15 +27,16 @@ func Setup(path string) {
 		os.Exit(1)
 	}
 
-	Application = &ApplicationStruct{
-		Port: viper.GetString("application.port"),
-	}
+	viper.WatchConfig()
 
-	CORS.Enable = viper.GetBool("cors.enable")
-	CORS.AllowOrigins = viper.GetStringSlice("cors.AllowOrigins")
-	CORS.AllowMethods = viper.GetStringSlice("cors.AllowMethods")
-	CORS.AllowHeaders = viper.GetStringSlice("cors.AllowHeaders")
-	CORS.AllowCredentials = viper.GetBool("cors.AllowCredentials")
-	CORS.MaxAge = viper.GetInt("cors.MaxAge")
+	viper.OnConfigChange(func(e fsnotify.Event) {
+		fmt.Println("config file changed:", e.Name)
+		if err := viper.Unmarshal(&Case); err != nil {
+			fmt.Println(err)
+		}
+	})
+	if err := viper.Unmarshal(&Case); err != nil {
+		fmt.Println(err)
+	}
 
 }

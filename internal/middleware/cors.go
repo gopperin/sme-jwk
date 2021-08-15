@@ -12,10 +12,10 @@ import (
 // Cors 跨域请求中间件
 func Cors() gin.HandlerFunc {
 	return cors.New(cors.Config{
-		AllowOrigins:     myconfig.CORS.AllowOrigins,
-		AllowMethods:     myconfig.CORS.AllowMethods,
-		AllowHeaders:     myconfig.CORS.AllowHeaders,
-		AllowCredentials: myconfig.CORS.AllowCredentials,
-		MaxAge:           time.Second * time.Duration(myconfig.CORS.MaxAge),
+		AllowOrigins:     myconfig.Case.CORS.AllowOrigins,
+		AllowMethods:     myconfig.Case.CORS.AllowMethods,
+		AllowHeaders:     myconfig.Case.CORS.AllowHeaders,
+		AllowCredentials: myconfig.Case.CORS.AllowCredentials,
+		MaxAge:           time.Second * time.Duration(myconfig.Case.CORS.MaxAge),
 	})
 }

@@ -26,7 +26,7 @@ func ProvideService(chainCache *cache.ChainCache) Service {
 // GetJwk GetJwk
 func (s *Service) GetJwk(kid string) (map[string]interface{}, error) {
 
-	_keys, err := s.ChainCache.Get("gudp.jwks." + kid)
+	_keys, err := s.ChainCache.Get("sme.jwks." + kid)
 	if err != nil {
 		logrus.Println("ChainCache Get", err.Error())
 		return nil, err
@@ -45,7 +45,7 @@ func (s *Service) GetJwk(kid string) (map[string]interface{}, error) {
 // CreateJwk CreateJwk
 func (s *Service) CreateJwk(jwk jwt.JWK) error {
 
-	err := s.ChainCache.Set("gudp.jwks."+jwk.KID, jwk.Keys, &store.Options{})
+	err := s.ChainCache.Set("sme.jwks."+jwk.KID, jwk.Keys, &store.Options{})
 	if err != nil {
 		logrus.Println("ChainCache Set", err.Error())
 		return err
@@ -59,7 +59,7 @@ func (s *Service) Signin(user jwt.User) (string, error) {
 
 	_jwt := jwt.JWT{}
 
-	_cacheKey, err := s.ChainCache.Get("gudp.jwks." + user.KID)
+	_cacheKey, err := s.ChainCache.Get("sme.jwks." + user.KID)
 	if err != nil {
 		logrus.Println(err)
 		return "", err
@@ -84,7 +84,8 @@ func (s *Service) Signin(user jwt.User) (string, error) {
 	_claims.UID = "13810167616"
 	_claims.Name = "eric"
 	_claims.IssuedAt = time.Now().Unix()
-	_claims.ExpiresAt = time.Now().Add(8 * time.Hour).Unix()
+	// _claims.ExpiresAt = time.Now().Add(8 * time.Hour).Unix()
+	_claims.ExpiresAt = time.Now().Add(365 * 24 * time.Hour).Unix()
 	_claims.Subject = "13810167616"
 	_claims.Jti = uuid.UUID()
 

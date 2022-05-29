@@ -5,9 +5,10 @@ import (
 	"encoding/json"
 	"time"
 
-	"github.com/Eric-GreenComb/contrib/uuid"
 	"github.com/eko/gocache/cache"
 	"github.com/eko/gocache/store"
+	gonanoid "github.com/matoous/go-nanoid/v2"
+	// "github.com/Eric-GreenComb/contrib/uuid"
 	"github.com/sirupsen/logrus"
 
 	"sme-jwk/internal/jwt"
@@ -87,7 +88,8 @@ func (s *Service) Signin(user jwt.User) (string, error) {
 	// _claims.ExpiresAt = time.Now().Add(8 * time.Hour).Unix()
 	_claims.ExpiresAt = time.Now().Add(365 * 24 * time.Hour).Unix()
 	_claims.Subject = "13810167616"
-	_claims.Jti = uuid.UUID()
+	// _claims.Jti = uuid.UUID()
+	_claims.Jti = gonanoid.MustGenerate("0123456789abcdefghijklmnopqrstuvwxyz", 16)
 
 	_jwtToken, err := _jwt.CreateToken(user.KID, _claims)
 	if err != nil {

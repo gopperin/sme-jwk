@@ -3,7 +3,6 @@ module sme-jwk
 go 1.16
 
 require (
-	github.com/Eric-GreenComb/contrib v0.0.0-20210608153232-20832241616f
 	github.com/dgraph-io/ristretto v0.1.0
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/eko/gocache v1.1.1
@@ -21,9 +20,9 @@ require (
 	github.com/gin-gonic/gin v1.7.2
 	github.com/go-redis/redis/v7 v7.4.0
 	github.com/google/wire v0.5.0
+	github.com/matoous/go-nanoid/v2 v2.0.0
 	github.com/pkg/errors v0.9.1
 	github.com/sirupsen/logrus v1.8.1
 	github.com/spf13/cobra v1.2.1
 	github.com/spf13/viper v1.8.1
-	github.com/zheng-ji/goSnowFlake v0.0.0-20180906112711-fc763800eec9 // indirect
 )
